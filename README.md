@@ -1,23 +1,23 @@
 # Go Workflow Management Example
 
-Bu proje, iş akışı yönetim sisteminin örnek bir implementasyonudur.
+This project is an example implementation of a workflow management system.
 
-## Örnek Kullanım
+## Example Usage
 
-### 1. Sipariş Workflow'unu Oluşturma
+### 1. Creating Order Workflow
 
 ```bash
 curl -X POST http://localhost:8080/workflows \
 -H "Content-Type: application/json" \
 -d '{
-  "name": "Sipariş İşlemi",
+  "name": "Order Process",
   "type": "order_process",
   "created_by": "65b012345678901234567890",
   "steps": [
     {
       "id": "65b012345678901234567891",
       "type": "task",
-      "title": "Sipariş Detayları",
+      "title": "Order Details",
       "assigned_to": "65b012345678901234567890",
       "status": "pending",
       "next_steps": ["65b012345678901234567892"]
@@ -25,7 +25,7 @@ curl -X POST http://localhost:8080/workflows \
     {
       "id": "65b012345678901234567892",
       "type": "approval",
-      "title": "Stok Kontrolü",
+      "title": "Stock Control",
       "assigned_to": "65b012345678901234567893",
       "status": "pending",
       "next_steps": ["65b012345678901234567894"],
@@ -34,7 +34,7 @@ curl -X POST http://localhost:8080/workflows \
     {
       "id": "65b012345678901234567894",
       "type": "process",
-      "title": "Fatura Oluşturma",
+      "title": "Invoice Generation",
       "assigned_to": "65b012345678901234567895",
       "status": "pending",
       "result_type": "invoice",
@@ -44,7 +44,7 @@ curl -X POST http://localhost:8080/workflows \
 }'
 ```
 
-### 2. Sipariş Detaylarını Girme
+### 2. Entering Order Details
 
 ```bash
 curl -X POST http://localhost:8080/workflows/WORKFLOW_ID/steps/65b012345678901234567891/process \
@@ -61,8 +61,8 @@ curl -X POST http://localhost:8080/workflows/WORKFLOW_ID/steps/65b01234567890123
       }
     ],
     "customer_info": {
-      "name": "Ahmet Yılmaz",
-      "email": "ahmet@example.com",
+      "name": "John Smith",
+      "email": "john@example.com",
       "tax_number": "1234567890"
     },
     "total_amount": 15000
@@ -70,7 +70,7 @@ curl -X POST http://localhost:8080/workflows/WORKFLOW_ID/steps/65b01234567890123
 }'
 ```
 
-### 3. Stok Kontrolü
+### 3. Stock Control
 
 ```bash
 curl -X POST http://localhost:8080/workflows/WORKFLOW_ID/steps/65b012345678901234567892/process \
@@ -79,13 +79,13 @@ curl -X POST http://localhost:8080/workflows/WORKFLOW_ID/steps/65b01234567890123
   "action": "approve",
   "data": {
     "stock_approval": true,
-    "stock_notes": "Stok yeterli",
-    "approved_by": "Depo Sorumlusu"
+    "stock_notes": "Stock is sufficient",
+    "approved_by": "Warehouse Manager"
   }
 }'
 ```
 
-### 4. Fatura Oluşturma
+### 4. Invoice Generation
 
 ```bash
 curl -X POST http://localhost:8080/workflows/WORKFLOW_ID/steps/65b012345678901234567894/process \
@@ -93,7 +93,7 @@ curl -X POST http://localhost:8080/workflows/WORKFLOW_ID/steps/65b01234567890123
 -d '{
   "action": "approve",
   "data": {
-    "invoice_number": "FTR-2024-001",
+    "invoice_number": "INV-2024-001",
     "invoice_date": "2024-01-24T15:00:00Z",
     "items": [
       {
