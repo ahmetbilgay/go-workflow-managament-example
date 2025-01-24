@@ -1,4 +1,4 @@
-# Go Workflow Management Example
+# Go Workflow Management
 
 ## About
 
