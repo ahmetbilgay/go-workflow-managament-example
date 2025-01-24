@@ -11,6 +11,36 @@ This project demonstrates a robust workflow management system implementation in 
 - 📊 Data validation at each step
 - 🔍 Process tracking and monitoring
 - 📝 Detailed documentation with examples
+- 🔔 Real-time notifications via WebSocket
+- 💾 Persistent workflow state management
+
+## API Endpoints
+
+### Workflow Management
+- `POST /workflows` - Create a new workflow
+- `GET /workflows/{id}` - Get workflow details by ID
+- `GET /workflows/user/{userId}` - Get all workflows assigned to a user
+- `POST /workflows/{id}/steps/{stepId}/process` - Process a workflow step
+
+### WebSocket Notifications
+- `GET /ws` - WebSocket connection endpoint for real-time notifications
+
+## Workflow Types
+- `task` - Basic task step
+- `approval` - Approval required step
+- `decision` - Decision making step
+- `process` - Automated process step
+
+## Result Types
+- `invoice` - Invoice generation result
+- `document` - Document generation result
+- `report` - Report generation result
+- `notification` - Notification result
+
+## Notification Types
+- `workflow` - Workflow related notifications
+- `task` - Task related notifications
+- `system` - System notifications
 
 ## Example Usage
 
